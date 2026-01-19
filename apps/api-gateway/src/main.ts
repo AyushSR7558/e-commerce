@@ -9,6 +9,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser'
 import rateLimit, { ipKeyGenerator } from 'express-rate-limit';
+import proxy from "express-http-proxy";
 const app = express();
 
 app.use(
@@ -44,9 +45,11 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-app.get('/api', (req, res) => {
+app.get('/gateway-health', (req, res) => {
   res.send({ message: 'Welcome to api-gateway!' });
 });
+
+app.use("/", proxy("http://127.0.0.1:6001"))
 
 const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {
