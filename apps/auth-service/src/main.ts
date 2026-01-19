@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { Http2Server } from 'http2';
-import { error } from 'console';
+import { sharedUtils } from 'shared-utils/src';
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 6001;
