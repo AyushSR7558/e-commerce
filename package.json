@@ -57,6 +57,7 @@
   "workspaces": [
     "apps/*",
     "packages/*",
-    "shared-utils"
+    "shared-utils",
+    "shared"
   ]
 }

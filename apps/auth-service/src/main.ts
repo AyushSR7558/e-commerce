@@ -1,27 +1,20 @@
 import express from 'express';
-import cors from 'cors';
-import { sharedUtils } from 'shared-utils/src';
-
-const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 6001;
+import cors from "cors"
+import {shared} from "@e-commerce/shared"
 
 const app = express();
 
-app.use(
-  cors({
-    origin: ["*"],
-    allowedHeaders: ['Authorization', 'Authentication', 'Content-Type'],
-  }),
-);
+app.use(cors({
+  origin: "*",
+  allowedHeaders: ['Authorization', 'Authentication', 'Content-Type'],
+}))
 
 app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
+  console.log('REQUEST HIT');
+  shared();
+  res.send('OK');
 });
 
-const server = app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+app.listen(6001, () => {
+  console.log('SERVER STARTED');
 });
-
-server.on("error", (err) => {
-  console.log("Server Error: ", err);
-} )
